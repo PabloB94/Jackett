@@ -89,6 +89,10 @@ search:
     # &startYear=&endYear=&playlistId=&collectionId=&categories[]=1&perPage=100&free[0]=100
     - path: torrents
 
+  headers:
+    # site blocks Jackett's User-Agents, so slightly alter it here (e.g. Safari/537.36 > Safari/537.35)
+    User-Agent: [ "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.35" ]
+
   inputs:
     $raw: "{{ range .Categories }}categories[]={{.}}&{{end}}"
     name: "{{ if .Query.IMDBID }}{{ else }}{{ .Keywords }}{{ end }}" # for dashboard imdbid search
